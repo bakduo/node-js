@@ -27,6 +27,19 @@ function potencia(x,n){
   return Math.pow(n,x);
 }
 
+function testingBasicPrime(n) {
+var index=0;
+
+  //caso base 
+  if(i == 1) return false;
+ //Tiene que ser divisible para todo el resto menores a n
+  for(index = 2; index < n; index++) {
+    if(n % index == 0) return false;
+  }
+  return true;
+}
+
+
 var fs = require('fs');
 var outfile = "prime_number.txt";
 var out = "List number prime.\n";
@@ -39,13 +52,17 @@ for (i = 2; i < max; i++) {
     //result = ((factorial(i-1)+1) % i);
     //a^p - a es divisible por p
     //Pequeño teorema de Fermat:
-    result = ((potencia(i,2) - i) % 2);
+    //result = ((potencia(i,2) - i) % 2);
     //console.log( "valor para "+ i + " es : " +((factorial(i-1)+1)%i)+ "\n");
-    if (result == 0){
+    //if (result == 0){
+    
+    if (testingBasicPrime(i)){
       console.log( "valor para " + i + " es primo\n");
-      imp+=i+",";
+      imp+=i;
       total++;
+      if (total < 100)imp+=",";
     }
+
    if (total==100){
     break;
    }
