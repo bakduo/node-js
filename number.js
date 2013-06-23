@@ -23,23 +23,35 @@ function factorial (n) {
     return n;
 }
 
+function potencia(x,n){
+  return Math.pow(n,x);
+}
+
 var fs = require('fs');
 var outfile = "prime_number.txt";
 var out = "List number prime.\n";
-var max=100;
+var max=100000;
+var total=0;
 var result=0;
 var imp="";
 
 for (i = 2; i < max; i++) {
-    result = ((factorial(i-1)+1) % i);
+    //result = ((factorial(i-1)+1) % i);
+    //a^p - a es divisible por p
+    //Pequeño teorema de Fermat:
+    result = ((potencia(i,2) - i) % 2);
     //console.log( "valor para "+ i + " es : " +((factorial(i-1)+1)%i)+ "\n");
     if (result == 0){
       console.log( "valor para " + i + " es primo\n");
       imp+=i+",";
+      total++;
     }
+   if (total==100){
+    break;
+   }
 }
 
 //console.log( "valor para 3 es : " + factorial(3)+ "\n");
- 
+console.log("Totales numeros primos: "+ total); 
 fs.writeFileSync(outfile, imp);  
 console.log("Script: " + __filename + "\nWrote: " + out + "To: " + outfile);
